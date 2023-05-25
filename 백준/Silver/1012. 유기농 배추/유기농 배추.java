@@ -56,9 +56,10 @@ public class Main {
 			int newX = x + dirR[i];
 			int newY = y + dirC[i];
 			
-			if(newX>=0 && newY>=0 && newX<M && newY<N)
-			if(adjArray[newY][newX] == 1 && !visited[newY][newX]) {
-				dfs(newX, newY);
+			if(newX>=0 && newY>=0 && newX<M && newY<N) {
+				if(adjArray[newY][newX] == 1 && !visited[newY][newX]) {
+					dfs(newX, newY);
+				}
 			}
 		}
 	}

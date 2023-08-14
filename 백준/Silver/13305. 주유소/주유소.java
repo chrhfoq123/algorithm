@@ -20,7 +20,7 @@ public class Main{
             l[i] = Integer.parseInt(st.nextToken());
         }
         
-        int sum = 0;
+        long sum = 0;
         int min = l[0];
         for(int i=0; i<km.length; i++){
             if(min > l[i]){

@@ -1,34 +1,34 @@
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main{
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
-        int[] card = new int[N];
-        int sum = 0;
-        int answer = 0;
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+        int[] num = new int[n];
         
         st = new StringTokenizer(br.readLine());
-        for(int i=0; i<N; i++){
-            card[i] = Integer.parseInt(st.nextToken());
+        for(int i=0; i<n; i++){
+            num[i] = Integer.parseInt(st.nextToken());
         }
         
-        for(int i=0; i<N; i++){
-            for(int j=i+1; j<N; j++){
-                for(int k=j+1; k<N; k++){
-                    sum = card[i] + card[j] + card[k];
-                    if(answer < sum && sum <= M){
-                        answer = sum;
+        int max = 0;
+        int sum = 0;
+        for(int i=0; i<n; i++){
+            for(int j=i+1; j<n; j++){
+                for(int k=j+1; k<n; k++){
+                    sum = num[i] + num[j] + num[k];
+                    if(sum <= m && max < sum){
+                        max = sum;
                     }
                 }
             }
         }
         
-        System.out.println(answer);
+        System.out.print(max);
     }
 }

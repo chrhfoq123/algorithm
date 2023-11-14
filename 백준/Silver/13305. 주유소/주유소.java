@@ -7,21 +7,21 @@ public class Main{
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
-        int[] km = new int[N-1];
-        int[] l = new int[N];
+        long[] km = new long[N-1];
+        long[] l = new long[N];
         
         StringTokenizer st = new StringTokenizer(br.readLine());
         for(int i=0; i<km.length; i++){
-            km[i] = Integer.parseInt(st.nextToken());
+            km[i] = Long.parseLong(st.nextToken());
         }
         
         st = new StringTokenizer(br.readLine());
         for(int i=0; i<l.length; i++){
-            l[i] = Integer.parseInt(st.nextToken());
+            l[i] = Long.parseLong(st.nextToken());
         }
         
         long sum = 0;
-        int min = l[0];
+        long min = l[0];
         for(int i=0; i<km.length; i++){
             if(min > l[i]){
                 min = l[i];

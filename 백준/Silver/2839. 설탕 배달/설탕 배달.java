@@ -1,27 +1,27 @@
-import java.io.IOException;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Main{
-    public static void main(String[] args) throws IOException{
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
-        int count = 0;
-        
-        while(true){
-            if(N % 5 == 0){
-                count += (N / 5);
-                System.out.println(count);
-                break;
-            }else{
-                N -= 3;
-                count++;
-            }
-            
-            if(N < 0){
-                System.out.println("-1");
-                break;
-            }
-        }
+public class Main {
+    public static void main(String[] args) throws IOException {
+    	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    	int n = Integer.parseInt(br.readLine());
+    	
+    	int answer = 0;
+    	while(true) {
+    		if(n % 5 == 0) {
+    			answer += (n/5);
+        		System.out.print(answer);
+        		break;
+    		}else {
+    			n -= 3;
+    			answer++;
+    		}
+    		
+    		if(n < 0) {
+    			System.out.print("-1");
+    			break;
+    		}
+    	}	
     }
 }

@@ -1,5 +1,5 @@
-import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -7,55 +7,57 @@ import java.util.StringTokenizer;
 
 public class Main {
 	
-	static int[][] adjArray;
-	static boolean[][] visited;
-	static int[] dirX = {0, 0, 1, -1};
-	static int[] dirY = {1, -1, 0, 0};
-	static int N;
-	static int M;
+	public static int n;
+	public static int m;
+	public static int[][] board;
+	public static boolean[][] visited;
+	public static int[] dx = {-1, 0, 1, 0};
+	public static int[] dy = {0, 1, 0, -1};
 	
-	public static void main(String[] args) throws IOException{
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		N = Integer.parseInt(st.nextToken());
-		M = Integer.parseInt(st.nextToken());
-		
-		adjArray = new int[N][M];
-		visited = new boolean[N][M];
-		
-		for(int i=0; i<N; i++) {
-			String input = br.readLine();
-			for(int j=0; j<M; j++) {
-				adjArray[i][j] = input.charAt(j)-'0';
-			}
-		}
-		
-		visited[0][0] = true;
-		bfs(0, 0);
-		System.out.println(adjArray[N-1][M-1]);
+	public static boolean inRange(int x, int y) {
+		return (x >= 0 && x < n && y >= 0 && y < m);
 	}
 	
-	static void bfs(int x, int y) {
+	public static void bfs(int x, int y) {
 		Queue<int[]> queue = new LinkedList<>();
 		queue.offer(new int[] {x, y});
+		visited[x][y] = true;
 		
 		while(!queue.isEmpty()) {
-			int[] nowXY = queue.poll();
-			int nowX = nowXY[0];
-			int nowY = nowXY[1];
+			int[] nXY = queue.poll();
+			int nowX = nXY[0];
+			int nowY = nXY[1];
 			
 			for(int i=0; i<4; i++) {
-				int nextX = nowX - dirX[i];
-				int nextY = nowY - dirY[i];
-				
-				if(nextX>=0 && nextY>=0 && nextX<N && nextY<M) {
-					if(adjArray[nextX][nextY] == 1 && !visited[nextX][nextY]) {
-						queue.offer(new int[] {nextX, nextY});
-						visited[nextX][nextY] = true;
-						adjArray[nextX][nextY] = adjArray[nowX][nowY]+1;
-					}
+				int nx = nowX + dx[i];
+				int ny = nowY + dy[i];
+				if(inRange(nx, ny) && board[nx][ny] == 1 && !visited[nx][ny]) {
+					queue.offer(new int[] {nx, ny});
+					visited[nx][ny] = true;
+					board[nx][ny] = board[nowX][nowY] + 1;
 				}
 			}
 		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+		
+		board = new int[n][m];
+		visited = new boolean[n][m];
+		
+		for(int i=0; i<n; i++) {
+			String s = br.readLine();
+			for(int j=0; j<m; j++) {
+				board[i][j] = s.charAt(j) - '0';
+			}
+		}
+		
+		bfs(0, 0);
+		
+		System.out.println(board[n-1][m-1]);
 	}
 }

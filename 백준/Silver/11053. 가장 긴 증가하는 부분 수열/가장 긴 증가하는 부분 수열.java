@@ -1,27 +1,37 @@
-import java.util.Scanner;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
-public class Main {
-    public static void main(String[] args){
-    	Scanner sc = new Scanner(System.in);
-    	int n = sc.nextInt();
-    	int[] A = new int[n+1];
-    	int[] dp = new int[n+1];
-    	
-    	for(int i=1; i<=n; i++) {
-    		A[i] = sc.nextInt();
-    	}
-    	
-    	int max = 0;
-    	for(int i=1; i<=n; i++) {
+public class Main{
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int[] arr = new int[n];
+        int[] dp = new int[n];
+        
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for(int i=0; i<n; i++){
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+        
+        for(int i=0; i<n; i++){
             dp[i] = 1;
-    		for(int j=1; j<i; j++) {
-    			if(A[j] < A[i]) {
-    				dp[i] = Math.max(dp[i], dp[j]+1);
-    			}
-    		}
-    		max = Math.max(max, dp[i]);
-    	}
-    	
-    	System.out.print(max);
+            
+            for(int j=0; j<i; j++){
+                if(arr[j] < arr[i] && dp[i] < dp[j] + 1){
+                    dp[i] = dp[j] + 1;
+                }
+            }
+        }
+        
+        int max = 0;
+        for(int i=0; i<n; i++){
+            if(max < dp[i]){
+                max = dp[i];
+            }
+        }
+        
+        System.out.print(max);
     }
 }

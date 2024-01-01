@@ -6,7 +6,6 @@ import java.util.StringTokenizer;
 public class Main {
 	
 	public static int[] arr;
-	public static boolean[] visited;
 	public static StringBuilder sb = new StringBuilder();
 	
 	public static void dfs(int n, int m, int depth, int start) {
@@ -19,13 +18,8 @@ public class Main {
 		}
 		
 		for(int i=start; i<n; i++) {
-			if(!visited[i]) {
-				visited[i] = true;
-				arr[depth] = i+1;
-				dfs(n, m, depth+1, i+1);
-				
-				visited[i] = false;
-			}
+            arr[depth] = i+1;
+            dfs(n, m, depth+1, i+1);
 		}
 	}
 	
@@ -36,7 +30,6 @@ public class Main {
 		int m = Integer.parseInt(st.nextToken());
 		
 		arr = new int[m];
-		visited = new boolean[n];
 		
 		dfs(n, m, 0, 0);
 		System.out.print(sb);
